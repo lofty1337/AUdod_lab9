@@ -1,28 +1,26 @@
-﻿#include <SFML/Graphics.hpp>
+#include <SFML/Graphics.hpp>
+#include <iostream>
 #include <thread>
 #include <chrono>
+#include <vector>
 
 using namespace std::chrono_literals;
 
 int main()
 {
-    float Cx,Cy,Sx,Sy,Ox,Oy;
+    int n;
+    std::cin >> n;
+    std::vector<sf::CircleShape> circles;   
     sf::RenderWindow window(sf::VideoMode(800, 600), "nge");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-    Cx = 700;
-    Cy = 0;
-    shape.setPosition(Cx, Cy);
-    sf::CircleShape square(80.f, 4);
-    square.setFillColor(sf::Color::Blue);
-    Sx = 700;
-    Sy = 200;
-    square.setPosition(Sx, Sy);
-    sf::CircleShape octagon(80.f, 8);
-    octagon.setFillColor(sf::Color::Red);
-    Ox = 700;
-    Oy = 400;
-    octagon.setPosition(Ox, Oy);
+    float x = 700;
+    float y = 0;
+    float size = 30;
+    for (int i = 0; i < n; i++) {
+        sf::CircleShape shape(size);
+        shape.setFillColor(sf::Color::Red);
+        shape.setPosition(x , y + i * (size+size));
+        circles.push_back(shape);
+    }
     while (window.isOpen())
     {
         sf::Event event;
@@ -31,23 +29,17 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
+        if (x > 0)
+            x--;
         window.clear();
-        window.draw(shape);
-        window.draw(square);
-        window.draw(octagon);
+        for(int i =0;i<circles.size();i++){
+            window.draw(circles[i]);
+            circles[i].setPosition(x, y + i * (size+size));
+        }
+        
         window.display();
-        if (Ox > 0)
-            --Ox;
-        if (Cx > 0)
-            --Cx;
-        if (Sx > 0)
-            --Sx;
-        shape.setPosition(Cx, Cy);
-        square.setPosition(Sx, Sy);
-        octagon.setPosition(Ox, Oy);
+
         std::this_thread::sleep_for(0.1ms);
     }
-
     return 0;
 }
