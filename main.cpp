@@ -4,6 +4,10 @@ using namespace std::chrono_literals;
 
 int main()
 {
+
+    
+
+
     int score = 0;
     bool begin = false;
     ft::Rei* rei = nullptr;
@@ -59,6 +63,13 @@ int main()
 
     while (window.isOpen())
     {
+        sf::Image icon;
+        if (!icon.loadFromFile("img/icon.png"))
+        {
+            return -1;
+        }
+        window.setIcon(32, 32, icon.getPixelsPtr());
+
         sf::Event event;
         while (window.pollEvent(event))
         {
@@ -90,11 +101,17 @@ int main()
                 for (int i = 0; i < rei->shots.size(); i++) {
                     window.draw(rei->shots[i]);
                     if (rei->Collide(rei->shots[i], zero.GetZ())) {
+                        
                         zero.spawn();
+                        //rei->shots.erase(rei->shots.begin()+i);
+                        //rei->Shoot();
                         ++score;
+                        std::cout << rei->shots.size();
                         if ((score % 10 == 0) && (score != 0))
                             zero.enemySpeed += 0.5;
+                        
                     }
+                    
                 }
             }
             
