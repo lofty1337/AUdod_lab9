@@ -1,28 +1,62 @@
-﻿#include <SFML/Graphics.hpp>
-#include <thread>
-#include <chrono>
-
+﻿#include "Rei.h"
+#include "ZeroTwo.h"
 using namespace std::chrono_literals;
 
 int main()
 {
-    float Cx,Cy,Sx,Sy,Ox,Oy;
-    sf::RenderWindow window(sf::VideoMode(800, 600), "nge");
-    sf::CircleShape shape(100.f);
-    shape.setFillColor(sf::Color::Green);
-    Cx = 700;
-    Cy = 0;
-    shape.setPosition(Cx, Cy);
-    sf::CircleShape square(80.f, 4);
-    square.setFillColor(sf::Color::Blue);
-    Sx = 700;
-    Sy = 200;
-    square.setPosition(Sx, Sy);
-    sf::CircleShape octagon(80.f, 8);
-    octagon.setFillColor(sf::Color::Red);
-    Ox = 700;
-    Oy = 400;
-    octagon.setPosition(Ox, Oy);
+    int score = 0;
+    bool begin = false;
+    ft::Rei* rei = nullptr;
+    ft::ZeroTwo zero;
+    sf::RenderWindow window(sf::VideoMode(1600, 900, 32), "Nge");
+
+    sf::Texture texture;
+    if (!texture.loadFromFile("img/bg.jpg"))
+    {
+        std::cout << "ERROR when loading bg.jpg" << std::endl;
+        return false;
+    }
+    sf::Sprite back;
+    back.setTexture(texture);
+
+    sf::Texture start_texture;
+    if (!start_texture.loadFromFile("img/start.jpg"))
+    {
+        std::cout << "ERROR when loading start.jpg" << std::endl;
+        return false;
+    }
+    sf::Sprite start;
+    start.setTexture(start_texture);
+
+    sf::Font font;
+    if (!font.loadFromFile("fonts/arial.ttf"))
+    {
+        std::cout << "ERROR: font was not loaded." << std::endl;
+        return -1;
+    }
+    
+    sf::Text text;
+    text.setFont(font);
+    text.setString("Press P to start");
+    text.setCharacterSize(50);
+    text.setFillColor(sf::Color::Red);
+    text.setPosition(650, 350);
+
+
+    rei = new ft::Rei();
+
+    if (!zero.Setup())
+    {
+        window.close();
+        return -1;
+    }
+    if (!rei->Setup())
+    {
+        delete rei;
+        window.close();
+        return -1;
+    }
+
     while (window.isOpen())
     {
         sf::Event event;
@@ -31,23 +65,54 @@ int main()
             if (event.type == sf::Event::Closed)
                 window.close();
         }
-
         window.clear();
-        window.draw(shape);
-        window.draw(square);
-        window.draw(octagon);
-        window.display();
-        if (Ox > 0)
-            --Ox;
-        if (Cx > 0)
-            --Cx;
-        if (Sx > 0)
-            --Sx;
-        shape.setPosition(Cx, Cy);
-        square.setPosition(Sx, Sy);
-        octagon.setPosition(Ox, Oy);
-        std::this_thread::sleep_for(0.1ms);
-    }
+        if (sf::Keyboard::isKeyPressed(sf::Keyboard::P)) {
+            begin = true;
+            text.setString(std::string("Score ") + std::to_string(score));
+            text.setPosition(0, 0);
+        }
+        if (!begin)
+        {
+            window.draw(start);
+            window.draw(text);
+            window.display();
+        }
+        if(begin){
+            window.draw(back);
+        
+            text.setString(std::string("Score ") + std::to_string(score));
+            window.draw(text);
 
+            if (rei != nullptr) {
+                rei->Move();
+                window.draw(*rei->Get());
+                rei->Shoot();
+                for (int i = 0; i < rei->shots.size(); i++) {
+                    window.draw(rei->shots[i]);
+                    if (rei->Collide(rei->shots[i], zero.GetZ())) {
+                        zero.spawn();
+                        ++score;
+                        if ((score % 10 == 0) && (score != 0))
+                            zero.enemySpeed += 0.5;
+                    }
+                }
+            }
+            
+            zero.MoveZ();
+            window.draw(zero.GetZ());
+            if (zero.zt_y > zero.screen_h) {
+                score = 0;
+                zero.enemySpeed = 6;
+                zero.spawn();
+            }
+            rei->delay++;
+
+            window.display();
+
+            std::this_thread::sleep_for(1ms);
+        }
+    }
+    if (rei != nullptr)
+        delete rei;
     return 0;
 }

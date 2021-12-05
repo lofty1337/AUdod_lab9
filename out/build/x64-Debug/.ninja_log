@@ -1,0 +1,7 @@
+# ninja log v5
+1	643	6603560738988693	CMakeFiles/lab9.dir/main.cpp.obj	5dc2d474d487beb6
+643	751	6603560739888896	lab9.exe	e7bfa260d745352e
+0	56	6603573158171755	build.ninja	c323e5162c64e801
+2	487	6602597356179723	CMakeFiles/lab9.dir/Source1.cpp.obj	80c61d0559e55532
+1	617	6603555701431947	CMakeFiles/lab9.dir/ZeroTwo.cpp.obj	49fd895ee4bb4aed
+1	618	6603522925721934	CMakeFiles/lab9.dir/Rei.cpp.obj	d2ffe3991ccd27a3

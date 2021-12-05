@@ -1,25 +1,21 @@
-cmake_minimum_required(VERSION 3.15) # Проверка версии CMake.
-									 # Если версия установленой программы
-									 # старее указаной, произайдёт аварийный выход.
-
-set(PROJECT_NAME lab9)				 # имя проекта
+cmake_minimum_required(VERSION 3.15) 
 project("${PROJECT_NAME}")
 
 
-set(CMAKE_CXX_STANDARD 17)			 # устанавливаем 17 стандарт языка
+set(CMAKE_CXX_STANDARD 17)			 
 set(CMAKE_CXX_EXTENSIONS OFF)
 set(CMAKE_CXX_STANDARD_REQUIRED TRUE)
 
 
-add_definitions(-DSFML_STATIC)		 # дефайны
+add_definitions(-DSFML_STATIC)		 
 
-include_directories("ext/SFML/include/")	# добавляем директории
 include_directories("inc/")
-link_directories("ext/SFML/lib/")	
+include_directories("ext/SFML/include/")	
+link_directories("ext/SFML/lib/")
 
 add_executable("${PROJECT_NAME}" main.cpp
 		
-)
+ "Rei.h" "Rei.cpp" "ZeroTwo.h" "ZeroTwo.cpp")
 											
 target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  sfml-window-s-d
@@ -35,3 +31,7 @@ target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
 						  vorbisfile
 						  vorbis
 						  ogg)
+
+
+file(COPY "img" DESTINATION "/")
+file(COPY "fonts" DESTINATION "/")
