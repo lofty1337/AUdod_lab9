@@ -3,13 +3,9 @@
 namespace ft
 {
 	Rei::Rei()
-	{
-	}
+	{}
 	Rei::~Rei()
-	{
-		if (rei != nullptr)
-			delete rei;
-	}
+	{}
 
 	bool Rei::Setup()
 	{
@@ -19,14 +15,16 @@ namespace ft
 			return false;
 		}
 
-		rei = new sf::Sprite();
-		rei->setTexture(ReiTexture);
-		rei->setPosition(reiPos_x, reiPos_y);
-		rei->scale(scale, scale);
+		
+		rei.setTexture(ReiTexture);
+		rei.setPosition(reiPos_x, reiPos_y);
+		rei.scale(scale, scale);
+
+		return true;
 	}
 	void Rei::Move()
 	{
-		rei->setPosition(reiPos_x, reiPos_y);
+		rei.setPosition(reiPos_x, reiPos_y);
 		if (sf::Keyboard::isKeyPressed(sf::Keyboard::W))
 			if (reiPos_y > 0) 
 				reiPos_y -= speed;
@@ -41,7 +39,7 @@ namespace ft
 				reiPos_x -= speed;
 	}
 
-	sf::Sprite* Rei::Get() { return rei; }
+	sf::Sprite Rei::Get() { return rei; }
 	sf::RectangleShape Get(sf::RectangleShape sprite) { return sprite; }
 
 	void Rei::Shoot()

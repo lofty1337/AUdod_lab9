@@ -1,7 +1,13 @@
 # ninja log v5
-3	765	6603961833189876	CMakeFiles/lab9.dir/ZeroTwo.cpp.obj	49fd895ee4bb4aed
-0	797	6603961833509945	CMakeFiles/lab9.dir/Rei.cpp.obj	d2ffe3991ccd27a3
-0	618	6603999151048294	CMakeFiles/lab9.dir/main.cpp.obj	5dc2d474d487beb6
-619	796	6603999152518630	lab9.exe	e7bfa260d745352e
-0	877	6604141589678450	CMakeFiles/lab9.dir/main.cpp.obj	5dc2d474d487beb6
-878	991	6604141590628664	lab9.exe	e7bfa260d745352e
+3	620	6609179314204998	CMakeFiles/lab9.dir/ZeroTwo.cpp.obj	49fd895ee4bb4aed
+1	630	6609179314415042	CMakeFiles/lab9.dir/Rei.cpp.obj	d2ffe3991ccd27a3
+1	611	6609179793564127	CMakeFiles/lab9.dir/main.cpp.obj	5dc2d474d487beb6
+611	797	6609179795104473	lab9.exe	2b3ffeebc49afcfb
+0	5	0	clean	9992afb1f91dc381
+3	146	6609389904262203	CMakeFiles/NGE.dir/img/App.rc.res	5c824ea3a465d84b
+7	757	6609389910333569	CMakeFiles/NGE.dir/ZeroTwo.cpp.obj	c09239bfc6670a0b
+2	790	6609389910673650	CMakeFiles/NGE.dir/Rei.cpp.obj	8053f2a57bee2246
+1	795	6609389910733657	CMakeFiles/NGE.dir/main.cpp.obj	bc39948f5280e7e1
+795	1000	6609389912734111	NGE.exe	905ec2d5540379ee
+0	595	6609390560071673	CMakeFiles/NGE.dir/main.cpp.obj	bc39948f5280e7e1
+595	694	6609390560901860	NGE.exe	905ec2d5540379ee

@@ -20,7 +20,7 @@ namespace ft
 
 		bool Collide(sf::RectangleShape bullet, sf::Sprite target);
 
-		sf::Sprite* Get();
+		sf::Sprite Get();
 
 		int screen_w = 1600, screen_h = 900;
 		float scale = 0.25;
@@ -34,6 +34,6 @@ namespace ft
 		std::vector<sf::Vector2f> coords;
 
 		sf::Texture ReiTexture;
-		sf::Sprite* rei = nullptr;
+		sf::Sprite rei;
 	};
 }

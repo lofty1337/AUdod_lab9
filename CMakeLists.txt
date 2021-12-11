@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.15) 
 
-set(PROJECT_NAME lab9)	
+set(PROJECT_NAME NGE)	
 project("${PROJECT_NAME}")
 
 
@@ -17,22 +17,31 @@ link_directories("ext/SFML/lib/")
 
 add_executable("${PROJECT_NAME}" main.cpp
 		
- "Rei.h" "Rei.cpp" "ZeroTwo.h" "ZeroTwo.cpp")
+ "Rei.h" "Rei.cpp" "ZeroTwo.h" "ZeroTwo.cpp" img/App.rc)
 											
-target_link_libraries("${PROJECT_NAME}" sfml-graphics-s-d
-						  sfml-window-s-d
-						  sfml-system-s-d
-						  opengl32
-						  freetype
-						  winmm
-						  gdi32
-						  sfml-audio-s-d
-						  openal32
-						  flac
-						  vorbisenc
-						  vorbisfile
-						  vorbis
-						  ogg)
+target_link_libraries("${PROJECT_NAME}" 
+					debug sfml-graphics-s-d
+					debug sfml-window-s-d
+					debug sfml-system-s-d
+					debug sfml-audio-s-d)
+
+target_link_libraries("${PROJECT_NAME}" 
+					optimized sfml-graphics-s
+					optimized sfml-window-s
+					optimized sfml-system-s
+					optimized sfml-audio-s)
+
+target_link_libraries("${PROJECT_NAME}"
+					opengl32
+					freetype
+					winmm
+					gdi32
+					openal32
+					flac
+					vorbisenc
+					vorbisfile
+					vorbis
+					ogg)
 
 
 file(COPY "img" DESTINATION "/")
